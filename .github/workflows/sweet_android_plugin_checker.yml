@@ -1,4 +1,4 @@
-name: Android CI
+name: Sweet android plugin CI checker
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ develop ]
 
 jobs:
-  build:
+  sweet_android_plugin_ci_checker:
 
     runs-on: ubuntu-latest
 

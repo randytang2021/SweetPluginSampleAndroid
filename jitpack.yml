@@ -1,0 +1,12 @@
+jdk:
+  - openjdk9
+before_install:
+  - ./custom_setup.sh
+  - ls -l
+  - pwd
+install:
+  - echo "Running a custom install command"
+  - echo "Running a custom install command"
+  #- ./gradlew clean install -xtest
+env:
+  MYVAR: "custom environment variable"

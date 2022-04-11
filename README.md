@@ -1,4 +1,4 @@
-# SweetPluginSampleAndroid [![Sweet Plugin Build Checker](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml/badge.svg)](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml)
+# SweetPluginSampleAndroid [![Sweet android plugin CI checker](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml/badge.svg)](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml)
 
 - For maven publish, the Plugin/Library's AAR name is: **com.sweet.plugin: sample**
 - The AAR's version name convention should be:

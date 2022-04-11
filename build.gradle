@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-
 }
 
 apply from: 'wyze_plugin_aar_publish.gradle'
@@ -54,16 +53,7 @@ android {
 }
 
 dependencies {
-
-//    project.rootProject.allprojects.each {
-//        println("plugin build ---> "+it.name)
-//        if (it.name == "app"){
-//            println "app root dir:${it.rootDir}"
-//        }
-//    }
-
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation group: 'com.wyze.android', name: 'wpk', version: '2.29.0.9', changing: true
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'

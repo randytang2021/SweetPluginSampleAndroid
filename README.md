@@ -15,5 +15,5 @@
         )
 ```
 ## App placeholder
-- The source of truth of app placeholder is [EzywAppSampleAndroid](https://github.com/randytang2021/EzywAppSampleAndroid) repo on the [main branch](https://github.com/randytang2021/EzywAppSampleAndroid/tree/main)
-- The aar publish history is in [EzywAppSampleAndroid's page](https://congenial-spoon-5728117c.pages.github.io/)
+- The source of truth of app placeholder is [EzywAppSampleAndroid](https://github.com/randytang2021/EzywAppSampleAndroid) repo on the [develop branch](https://github.com/randytang2021/EzywAppSampleAndroid/tree/develop)
+- The aar publish history is in [EzywAppSampleAndroid's page](https://randytang2021.github.io/EzywAppSampleAndroid/)

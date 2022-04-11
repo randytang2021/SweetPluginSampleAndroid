@@ -1,4 +1,4 @@
-# SweetPluginSampleAndroid [![Wyze Plugin Build Checker](https://github.com/wyzelabs-inc/SweetPluginSampleAndroid/actions/workflows/wyze_plugin_build_checker.yml/badge.svg)](https://github.com/wyzelabs-inc/SweetPluginSampleAndroid/actions/workflows/wyze_plugin_build_checker.yml)
+# SweetPluginSampleAndroid [![Sweet Plugin Build Checker](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/wyze_plugin_build_checker.yml/badge.svg)](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/wyze_plugin_build_checker.yml)
 - For maven publish, the Plugin/Library's AAR name is: **com.sweet.plugin: sample**
 - The AAR's version name convention should be:
     * [major verison][minor version][alpha, beta,release,develop][patch version]
@@ -14,5 +14,5 @@
         )
 ```
 ## App placeholder
-- The source of truth of app placeholder is [WyzeAppCisampleAndroid](https://github.com/wyzelabs-inc/WyzeAppCisampleAndroid) repo on the [main branch](https://github.com/wyzelabs-inc/WyzeAppCisampleAndroid/tree/main)
-- The aar publish history is in [WyzeAppCisampleAndroid's page](https://congenial-spoon-5728117c.pages.github.io/)
+- The source of truth of app placeholder is [EzywAppSampleAndroid](https://github.com/randytang2021/EzywAppSampleAndroid) repo on the [main branch](https://github.com/randytang2021/EzywAppSampleAndroid/tree/main)
+- The aar publish history is in [EzywAppSampleAndroid's page](https://congenial-spoon-5728117c.pages.github.io/)

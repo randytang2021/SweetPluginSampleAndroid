@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: 'wyze_plugin_aar_publish.gradle'
+apply from: 'sweet_plugin_aar_publish.gradle'
 
 android {
     compileSdk 32

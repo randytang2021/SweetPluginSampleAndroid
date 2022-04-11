@@ -1,13 +1,13 @@
 /*
 * please do not modify this file!
 * It's being applied to 40+ plugins. We will use script to maintain it.
-* For change the aar version name, please go to the wyze_plugin_aar_version.properties in the current directory
+* For change the aar version name, please go to the sweet_plugin_aar_version.properties in the current directory
 * */
 apply plugin: 'maven-publish'
 
-class Wyzeconstant {
-    public static final WYZE_MAVEN_CONFIG = "wyze_android_development.properties"
-    public static final PLUGIN_VERSION_FILE_NAME = "wyze_plugin_aar_version.properties"
+class Sweetconstant {
+    public static final SWEET_MAVEN_CONFIG = "sweet_android_development.properties"
+    public static final PLUGIN_VERSION_FILE_NAME = "sweet_plugin_aar_version.properties"
     public static final MAVEN_USERNAME_STR = "maven.username"
     public static final MAVEN_PASSWORD_STR = "maven.password"
     public static final MAVEN_URL_STR = "maven.url"
@@ -15,24 +15,24 @@ class Wyzeconstant {
     public static final REPO_ALIAS_KEY_STRING = "repo.alias"
 }
 
-def VERSION_PROPERTY = getWyzeVersionProperties(project.projectDir.getAbsolutePath(), Wyzeconstant.PLUGIN_VERSION_FILE_NAME)
-def POM_VERSION = getPluginVersion(VERSION_PROPERTY, Wyzeconstant.PLUGIN_VERSION_KEY_STRING)
+def VERSION_PROPERTY = getSweetVersionProperties(project.projectDir.getAbsolutePath(), Sweetconstant.PLUGIN_VERSION_FILE_NAME)
+def POM_VERSION = getPluginVersion(VERSION_PROPERTY, Sweetconstant.PLUGIN_VERSION_KEY_STRING)
 
-def REPO_ALIAS = getPluginVersion(VERSION_PROPERTY, Wyzeconstant.REPO_ALIAS_KEY_STRING)
+def REPO_ALIAS = getPluginVersion(VERSION_PROPERTY, Sweetconstant.REPO_ALIAS_KEY_STRING)
 
 def REPO_NAME = getRepoName(project, REPO_ALIAS)
 
 def REPO_NAME_BREAK_DOWN = getNameList(REPO_NAME)
-def COMPANY_NAME = REPO_NAME_BREAK_DOWN[0]      // wyze, hualai, etc.
+def COMPANY_NAME = REPO_NAME_BREAK_DOWN[0]      // company name: sweet
 def ANDROID_TYPE = REPO_NAME_BREAK_DOWN[1]      // app or plugin
 def POM_ARTIFACT_ID = REPO_NAME_BREAK_DOWN[2]   // project name: wco, hms, event, etc.
 def POM_GROUP_ID = "com.${COMPANY_NAME}.${ANDROID_TYPE}"
 
 
-def WYZE_ANDROID_DEVELOPMENT_PROPERTIES = getWyzeAndroidDevelopmentProperties(Wyzeconstant.WYZE_MAVEN_CONFIG, "${COMPANY_NAME}", POM_ARTIFACT_ID)
-def POM_URL = getPomProperty(WYZE_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Wyzeconstant.MAVEN_URL_STR}")
-def POM_USERNAME = getPomProperty(WYZE_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Wyzeconstant.MAVEN_USERNAME_STR}")
-def POM_PASSWORD = getPomProperty(WYZE_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Wyzeconstant.MAVEN_PASSWORD_STR}")
+def SWEET_ANDROID_DEVELOPMENT_PROPERTIES = getSweetAndroidDevelopmentProperties(Sweetconstant.SWEET_MAVEN_CONFIG, "${COMPANY_NAME}", POM_ARTIFACT_ID)
+def POM_URL = getPomProperty(SWEET_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Sweetconstant.MAVEN_URL_STR}")
+def POM_USERNAME = getPomProperty(SWEET_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Sweetconstant.MAVEN_USERNAME_STR}")
+def POM_PASSWORD = getPomProperty(SWEET_ANDROID_DEVELOPMENT_PROPERTIES, "${COMPANY_NAME}", "${Sweetconstant.MAVEN_PASSWORD_STR}")
 
 project.ext {
     aarVersionName = POM_VERSION
@@ -41,7 +41,7 @@ project.ext {
 
 /*
  *
- * REPO_NAME_BREAK_DOWN = [wyze, plugin, event, android]  <------ WyzePluginEventAndroid
+ * REPO_NAME_BREAK_DOWN = [sweet, plugin, event, android]  <------ SweetPluginEventAndroid
  * https://developer.android.com/studio/build/maven-publish-plugin
  * */
 def pomArrVersion = POM_VERSION
@@ -96,7 +96,7 @@ tasks.publish.doLast {
     new File("${buildDir}", "maven_publication_file_type.txt").text = "${artifactSuffix}"
 }
 
-private static Properties getWyzeAndroidDevelopmentProperties(String configFileName, String companyName, String pluginName) {
+private static Properties getSweetAndroidDevelopmentProperties(String configFileName, String companyName, String pluginName) {
     Properties properties = new Properties()
 
     def androidDevelopmentPropertiesCiPath = System.getenv("ANDROID_DEVELOPMENT_PROPERTIES_CI_PATH")
@@ -111,7 +111,7 @@ private static Properties getWyzeAndroidDevelopmentProperties(String configFileN
         }
         println "configFileNamePath ----> ${configFileNamePath}"
         if (configFileNamePath == null) {
-            throw new Exception("No wyze_android_development.properties set up!!")
+            throw new Exception("No sweet_android_development.properties set up!!")
         } else {
             def file = new File("${configFileNamePath}/${configFileName}")
             InputStream inputStream = file.newDataInputStream()
@@ -121,22 +121,22 @@ private static Properties getWyzeAndroidDevelopmentProperties(String configFileN
     } catch (Exception exception) {
 
         println "----------------------------------------------------------------------------------------------------------------------------------------------------------"
-        println "----- getWyzeAndroidDevelopmentProperties exception ----> ${exception.toString()}"
+        println "----- getSweetAndroidDevelopmentProperties exception ----> ${exception.toString()}"
         if (null != androidDevelopmentPropertiesCiPath && !androidDevelopmentPropertiesCiPath.isEmpty()) {
-            println "----- To publish ${companyName} plugin:${pluginName}'s AAR, please make sure the ${Wyzeconstant.WYZE_MAVEN_CONFIG} is under your ${androidDevelopmentPropertiesCiPath} directory in CI machine with the correct secret in Github:"
+            println "----- To publish ${companyName} plugin:${pluginName}'s AAR, please make sure the ${Sweetconstant.SWEET_MAVEN_CONFIG} is under your ${androidDevelopmentPropertiesCiPath} directory in CI machine with the correct secret in Github:"
         } else {
-            println "----- To publish ${companyName} plugin:${pluginName}'s AAR, please config ${Wyzeconstant.WYZE_MAVEN_CONFIG} under your ${System.properties['user.home']} directory:"
+            println "----- To publish ${companyName} plugin:${pluginName}'s AAR, please config ${Sweetconstant.SWEET_MAVEN_CONFIG} under your ${System.properties['user.home']} directory:"
         }
-        println "----- ${companyName}.${Wyzeconstant.MAVEN_USERNAME_STR}=xxxx"
-        println "----- ${companyName}.${Wyzeconstant.MAVEN_PASSWORD_STR}=xxxx"
-        println "----- ${companyName}.${Wyzeconstant.MAVEN_URL_STR}=www.xxxxxx"
+        println "----- ${companyName}.${Sweetconstant.MAVEN_USERNAME_STR}=xxxx"
+        println "----- ${companyName}.${Sweetconstant.MAVEN_PASSWORD_STR}=xxxx"
+        println "----- ${companyName}.${Sweetconstant.MAVEN_URL_STR}=www.xxxxxx"
         println "----------------------------------------------------------------------------------------------------------------------------------------------------------"
         println ""
     }
     return properties
 }
 
-private static Properties getWyzeVersionProperties(String dir, String configFileName) {
+private static Properties getSweetVersionProperties(String dir, String configFileName) {
     Properties properties = new Properties()
     def file = new File("${dir}/${configFileName}")
     InputStream inputStream = file.newDataInputStream()
@@ -147,7 +147,7 @@ private static Properties getWyzeVersionProperties(String dir, String configFile
 
 
 /*
- * WyzePluginEventAndroid --> wyze-plugin-event-android -> [wyze, plugin, event, android]
+ * SweetPluginEventAndroid --> sweet-plugin-event-android -> [sweet, plugin, event, android]
  * Write a function to map camel string to a low case array
  * */
 
@@ -180,9 +180,9 @@ private static String getPluginVersion(properties, key) {
     }
 }
 
-private static String getPomProperty(Properties WYZE_PROPERTIES, String companyName, String defaultKey) {
+private static String getPomProperty(Properties SWEET_PROPERTIES, String companyName, String defaultKey) {
     String key = "${companyName}.${defaultKey}"
-    if (!WYZE_PROPERTIES.containsKey(key)) {
+    if (!SWEET_PROPERTIES.containsKey(key)) {
         println "----------------------------------------------------------------------------------"
         println "----- please find the credential for company:${companyName}, includes: "
         println "----- ${companyName}.maven.password=xxx "
@@ -190,7 +190,7 @@ private static String getPomProperty(Properties WYZE_PROPERTIES, String companyN
         println "----- ${companyName}.maven.url=xxx "
         println "----------------------------------------------------------------------------------"
     } else {
-        return WYZE_PROPERTIES.getProperty(key)
+        return SWEET_PROPERTIES.getProperty(key)
     }
 }
 

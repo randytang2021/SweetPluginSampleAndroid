@@ -83,11 +83,10 @@ jobs:
           fi
           cat settings.gradle
 
-      - name: Build with Gradle
+      - name: "D -> Build and Test --> 1: ./gradlew :${{env.CURRENT_REPO}}:test"
         run: |
-          cd "./${ASSISTANT_REPO}"
+          cd "./${c}"
           ./gradlew ":${CURRENT_REPO}:clean"
-          #./gradlew :"${CURRENT_REPO}":build
           ./gradlew :"${CURRENT_REPO}":test
 
       - name: 'Z -> Clean up'

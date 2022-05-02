@@ -6,6 +6,12 @@ on:
       - main
       - develop
       - release/*
+  pull_request:
+    branches:
+      - main
+      - develop
+      - release/*
+    types: [ opened, closed, reopened ]
 env:
   ASSISTANT_REPO: 'EzywAppSampleAndroid'
   ASSISTANT_REPO_PLACEHOLDER_BRANCH: 'release/1.0.0.0'

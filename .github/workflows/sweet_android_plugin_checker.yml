@@ -89,17 +89,21 @@ jobs:
 
           cd "./${ASSISTANT_REPO}"
           ./gradlew ":${CURRENT_REPO}:clean"
-          ./gradlew :"${CURRENT_REPO}":build
+          #./gradlew :"${CURRENT_REPO}":build
           ./gradlew :"${CURRENT_REPO}":test
       - name: 'Z -> Clean up'
         run: |
-          delete_file_list=(
+          delete_file=(
             "${ASSISTANT_REPO}"
             "${CURRENT_REPO}}"
           )
-          for file_txt in "${delete_file_list[@]}"; do
-            if [ -f "./${file_txt}" ]; then
-              rm "./${file_txt}"
+          for file in "${delete_file[@]}"; do
+            if [ -f "./${file}" ]; then
+              rm "./${file}"
+            fi
+
+            if [ -d "./${file}" ]; then
+              rm -rf "./${file}"
             fi
           done
 

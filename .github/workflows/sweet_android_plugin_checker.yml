@@ -85,7 +85,7 @@ jobs:
 
       - name: "D -> Build and Test --> 1: ./gradlew :${{env.CURRENT_REPO}}:test"
         run: |
-          cd "./${{env.CURRENT_REPO}}"
+          cd "./${{env.ASSISTANT_REPO}}"
           ./gradlew ":${CURRENT_REPO}:clean"
           ./gradlew :"${CURRENT_REPO}":test
 

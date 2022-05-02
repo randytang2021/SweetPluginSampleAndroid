@@ -5,21 +5,72 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-
+env:
+  ASSISTANT_REPO: 'EzywAppSampleAndroid'
+  ASSISTANT_REPO_PLACEHOLDER_BRANCH: 'develop'
+  ASSISTANT_REPO_LOG_BRANCH: 'develop'
+  ASSISTANT_REPO_OWNER: 'randytang2021'
+  CURRENT_REPO: "${{ github.event.repository.name }}"
+  DEBUG: true
 jobs:
   sweet_android_plugin_ci_checker:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
-        
-    - name: Build with Gradle
-      run: |
-        echo "hello plugin checker"
+      - name: 'Debug: Tree pwd'
+        continue-on-error: true
+        if: env.DEBUG == 'true'
+        run: |
+          echo "pwd ---> $(pwd)"
+          tree -L 3
+
+      - uses: actions/checkout@v3
+      - name: 'Debug: Tree pwd'
+        continue-on-error: true
+        if: env.DEBUG == 'true'
+        run: |
+          echo "pwd ---> $(pwd)"
+          tree -L 3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Build with Gradle
+        run: |
+          echo "hello plugin checker"
+
+
+      - uses: actions/checkout@master
+        with:
+          name: "${{env.ASSISTANT_REPO_OWNER}}/${{env.ASSISTANT_REPO}}"
+          ref: "refs/heads/${{env.ASSISTANT_REPO_PLACEHOLDER_BRANCH}}"
+
+      - name: 'Debug: Tree pwd'
+        continue-on-error: true
+        if: env.DEBUG == 'true'
+        run: |
+          echo "pwd ---> $(pwd)"
+          tree -L 3
+
+      - name: 'Z -> Clean up'
+        run: |
+          delete_file_list=(
+            "${ASSISTANT_REPO}"
+            "${CURRENT_REPO}}"
+          )
+          for file_txt in "${delete_file_list[@]}"; do
+            if [ -f "./${file_txt}" ]; then
+              rm "./${file_txt}"
+            fi
+          done
+
+      - name: 'Debug: Tree pwd'
+        continue-on-error: true
+        if: env.DEBUG == 'true'
+        run: |
+          echo "pwd ---> $(pwd)"
+          tree -L 3

@@ -89,7 +89,7 @@ jobs:
           ./gradlew ":${CURRENT_REPO}:clean"
           ./gradlew :"${CURRENT_REPO}":test
 
-      - name: 'Z -> Clean up'
+      - name: 'Z -> Clean up --> 1: Delete every thing'
         run: |
           delete_file=(
             "${{env.ASSISTANT_REPO}}"

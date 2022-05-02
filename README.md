@@ -1,6 +1,14 @@
 # SweetPluginSampleAndroid [![Sweet android plugin CI checker](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml/badge.svg)](https://github.com/randytang2021/SweetPluginSampleAndroid/actions/workflows/sweet_android_plugin_checker.yml)
 
 - For maven publish, the Plugin/Library's AAR name is: **com.sweet.plugin: sample**
+- sweet_android_development.properties
+   * add this file in your machine's dir: ```System.properties['user.home']```
+   * or specify an env variable: ```ANDROID_DEVELOPMENT_PROPERTIES_CI_PATH=/xx/xx/xx/```
+   * ```
+      sweet.maven.password=xxx 
+      sweet.maven.username=xxx 
+      sweet.maven.url=xxx 
+     ```
 - The AAR's version name convention should be:
     * [major verison][minor version][alpha, beta,release,develop][patch version]
          + for patch version, never need to change it

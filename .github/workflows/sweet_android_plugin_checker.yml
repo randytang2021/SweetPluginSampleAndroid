@@ -26,6 +26,9 @@ jobs:
           tree -L 3
 
       - uses: actions/checkout@v3
+        with:
+          path: "${CURRENT_REPO}"
+
       - name: 'Debug: Tree pwd'
         continue-on-error: true
         if: env.DEBUG == 'true'

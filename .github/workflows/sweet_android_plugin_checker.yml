@@ -60,11 +60,37 @@ jobs:
         run: |
           echo "pwd ---> $(pwd)"
           tree -L 3
+      - name: "C -> Assistant repo setup --> 1: bind ${{env.ASSISTANT_REPO}} with ${{env.CURRENT_REPO}}"
+        run: |
+          cd "./${ASSISTANT_REPO}"
+          chmod +x gradlew
+          if [ -n "$ANDROID_SDK_ROOT" ]; then
+            echo "ANDROID_SDK_ROOT --> ${ANDROID_SDK_ROOT}"
+          else
+            echo "ANDROID_SDK_ROOT is not set up!"
+            #in case ANDROID_SDK_ROOT is not set correctly
+            touch local.properties
+            echo "sdk.dir=/home/ubuntu/Android/Sdk" >>local.properties
+          fi
+          if [ "$RUNNER_OS" == "Linux" ]; then
+               sed -i "s/ThisIsAPlaceHolder/${CURRENT_REPO}/g" settings.gradle
+               sed -i "s/\/\/pluginSet/pluginSet/g" settings.gradle
+          elif [ "$RUNNER_OS" == "macOS" ]; then
+               sed -i '' "s/ThisIsAPlaceHolder/${CURRENT_REPO}/g" settings.gradle
+               sed -i '' "s/\/\/pluginSet/pluginSet/g" settings.gradle
+          else
+               echo "$RUNNER_OS is not supported"
+               exit 1
+          fi
+          cat settings.gradle
 
       - name: Build with Gradle
         run: |
-          echo "hello plugin checker"
 
+          cd "./${ASSISTANT_REPO}"
+          ./gradlew ":${CURRENT_REPO}:clean"
+          ./gradlew :"${CURRENT_REPO}":build
+          ./gradlew :"${CURRENT_REPO}":test
       - name: 'Z -> Clean up'
         run: |
           delete_file_list=(

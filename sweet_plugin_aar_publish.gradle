@@ -1,6 +1,4 @@
 /*
-* please do not modify this file!
-* It's being applied to 40+ plugins. We will use script to maintain it.
 * For change the aar version name, please go to the sweet_plugin_aar_version.properties in the current directory
 * */
 apply plugin: 'maven-publish'

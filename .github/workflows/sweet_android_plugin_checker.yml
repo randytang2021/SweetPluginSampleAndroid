@@ -47,11 +47,11 @@ jobs:
           echo "pwd ---> $(pwd)"
           tree -L 3
 
-      - name: 'B -> Checkout code -> 2: ${{env.CURRENT_REPO}}'
+      - name: 'B -> Checkout code -> 2: ${{env.ASSISTANT_REPO}}'
         uses: actions/checkout@v3
         with:
           repository: "${{env.ASSISTANT_REPO_OWNER}}/${{env.ASSISTANT_REPO}}"
-          path: "${{env.ASSISTANT_REPO_OWNER}}"
+          path: "${{env.ASSISTANT_REPO}}"
           ref: "refs/heads/${{env.ASSISTANT_REPO_PLACEHOLDER_BRANCH}}"
 
       - name: 'Debug: Tree pwd'

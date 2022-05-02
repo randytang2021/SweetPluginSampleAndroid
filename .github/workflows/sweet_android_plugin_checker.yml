@@ -19,8 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-
       - name: 'Debug: Tree pwd'
         continue-on-error: true
         if: env.DEBUG == 'true'
@@ -29,16 +27,9 @@ jobs:
           tree -L 3
 
       - uses: actions/checkout@v3
-        name: 'B -> Checkout code -> 1: ${{env.CURRENT_REPO}}'
+        name: 'A -> Checkout code -> 1: ${{env.CURRENT_REPO}}'
         with:
           path: "${{env.CURRENT_REPO}}"
-
-      - name: 'A -> Build env -> 1: set up JDK 11'
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: gradle
 
       - name: 'Debug: Tree pwd'
         continue-on-error: true
@@ -47,7 +38,7 @@ jobs:
           echo "pwd ---> $(pwd)"
           tree -L 3
 
-      - name: 'B -> Checkout code -> 2: ${{env.ASSISTANT_REPO}}'
+      - name: 'A -> Checkout code -> 2: ${{env.ASSISTANT_REPO}}'
         uses: actions/checkout@v3
         with:
           repository: "${{env.ASSISTANT_REPO_OWNER}}/${{env.ASSISTANT_REPO}}"
@@ -60,6 +51,14 @@ jobs:
         run: |
           echo "pwd ---> $(pwd)"
           tree -L 3
+
+      - name: 'B -> Build env -> 1: set up JDK 11'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
       - name: "C -> Assistant repo setup --> 1: bind ${{env.ASSISTANT_REPO}} with ${{env.CURRENT_REPO}}"
         run: |
           cd "./${ASSISTANT_REPO}"
@@ -86,22 +85,21 @@ jobs:
 
       - name: Build with Gradle
         run: |
-
           cd "./${ASSISTANT_REPO}"
           ./gradlew ":${CURRENT_REPO}:clean"
           #./gradlew :"${CURRENT_REPO}":build
           ./gradlew :"${CURRENT_REPO}":test
+
       - name: 'Z -> Clean up'
         run: |
           delete_file=(
-            "${ASSISTANT_REPO}"
-            "${CURRENT_REPO}}"
+            "${{env.ASSISTANT_REPO}}"
+            "${{enbv.CURRENT_REPO}}"
           )
           for file in "${delete_file[@]}"; do
             if [ -f "./${file}" ]; then
               rm "./${file}"
             fi
-
             if [ -d "./${file}" ]; then
               rm -rf "./${file}"
             fi

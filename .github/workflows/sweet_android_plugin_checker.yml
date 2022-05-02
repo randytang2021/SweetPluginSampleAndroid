@@ -2,9 +2,10 @@ name: Sweet android plugin CI checker
 
 on:
   push:
-    branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
+    branches-ignore:
+      - main
+      - develop
+      - release/*
 env:
   ASSISTANT_REPO: 'EzywAppSampleAndroid'
   ASSISTANT_REPO_PLACEHOLDER_BRANCH: 'develop'

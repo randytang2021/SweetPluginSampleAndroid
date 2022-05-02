@@ -94,7 +94,7 @@ jobs:
         run: |
           delete_file=(
             "${{env.ASSISTANT_REPO}}"
-            "${{enbv.CURRENT_REPO}}"
+            "${{env.CURRENT_REPO}}"
           )
           for file in "${delete_file[@]}"; do
             if [ -f "./${file}" ]; then

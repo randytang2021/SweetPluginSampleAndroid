@@ -9,10 +9,6 @@
       sweet.maven.username=xxx 
       sweet.maven.url=xxx 
      ```
-- The AAR's version name convention should be:
-    * [major verison][minor version][alpha, beta,release,develop][patch version]
-         + for patch version, never need to change it
-         + make sure your verison name has four sections
 - In the [AndroidManifest.xml](src/main/AndroidManifest.xml) file, the Plugin/Library package name is: **com.sweet.plugin.sample**
 - Please use this Intent to launch the SampleMainActivity:
 ```
@@ -25,3 +21,6 @@
 ## App placeholder
 - The source of truth of app placeholder is [EzywAppSampleAndroid](https://github.com/randytang2021/EzywAppSampleAndroid) repo on the [release branch](https://github.com/randytang2021/EzywAppSampleAndroid/tree/release/1.0.0.0)
 - The aar publish history is in [EzywAppSampleAndroid's page](https://randytang2021.github.io/EzywAppSampleAndroid/)
+## Hands on
+- Use this repo as the template
+- Make sure you repo name convention is [Company_name][Plugin][Project_name][Android] just similar to SweetPluginSampleAndroid

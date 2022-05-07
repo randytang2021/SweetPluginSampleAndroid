@@ -24,3 +24,4 @@
 ## Hands on
 - Use this repo as the template
 - Make sure you repo name convention is [Company_name][Plugin][Project_name][Android] just similar to SweetPluginSampleAndroid
+- You repo/plugin's Github Action should be run successfully if you trigger one
